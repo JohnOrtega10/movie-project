@@ -18,6 +18,8 @@ sequelize
   })
   .catch((err) => console.log(err));
 
-app.listen(4000, () => {
-  console.log('App running');
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  `Express app running on port: ${PORT}`;
 });
