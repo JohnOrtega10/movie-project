@@ -1,15 +1,13 @@
 const express = require('express');
+const { usersRouter } = require('./routes/users.routes');
+const { actorsRouter } = require('./routes/actors.routes');
+const { moviesRouter } = require('./routes/movies.routes');
+
 const app = express();
 
-// app.use('/api/v1/user')
+//Endpoints
+app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/actors', actorsRouter);
+app.use('/api/v1/movies', moviesRouter);
 
 module.exports = { app };
-
-
-// 1. Create an Express server
-
-// 2. Establish database connection (Sequelize and must install the corresponding drivers)
-
-// 3. Create models based on the diagram on the Drive
-
-// 4. Establish relations between models
