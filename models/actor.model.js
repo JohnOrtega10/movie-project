@@ -19,7 +19,8 @@ const Actor = sequelize.define('actor', {
   },
   raiting: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 0
   },
   age: {
     type: DataTypes.INTEGER,

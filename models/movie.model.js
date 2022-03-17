@@ -20,11 +20,13 @@ const Movie = sequelize.define('movie', {
   },
   duration: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 0
   },
   raiting: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 1
   },
   img: {
     type: DataTypes.STRING(255),

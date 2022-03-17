@@ -15,10 +15,11 @@ const User = sequelize.define('user', {
   },
   email: {
     type: DataTypes.STRING(100),
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
   password: {
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(255),
     allowNull: false
   },
   status: {
@@ -27,8 +28,9 @@ const User = sequelize.define('user', {
     defaultValue: 'active'
   },
   role: {
-    type: DataTypes.STRING(100),
-    allowNull: false
+    type: DataTypes.STRING(10),
+    allowNull: false,
+    defaultValue: 'guest' //guest / admin
   }
 });
 
