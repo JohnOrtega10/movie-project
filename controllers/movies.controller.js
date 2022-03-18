@@ -1,11 +1,36 @@
+//Models
+const { Movie } = require('../models/movie.model');
+
+//Utils
+const { AppError } = require('../utils/appError');
 const { catchAsync } = require('../utils/catchAsyn');
+const { filterObj } = require('../utils/filterObj');
 
-exports.getAllMovies = catchAsync((req, res, next) => {});
+exports.getAllMovies = catchAsync(
+  async (req, res, next) => {
+    const movies = await Movie.findAll({
+      where: { status: 'active' }
+    });
 
-exports.getMovieById = catchAsync((req, res, next) => {});
+    res.status(200).json({
+      status: 'success',
+      data: { movies }
+    });
+  }
+);
 
-exports.createNewMovie = catchAsync((req, res, next) => {});
+exports.getMovieById = catchAsync(
+  async (req, res, next) => {}
+);
 
-exports.updateMovie = catchAsync((req, res, next) => {});
+exports.createNewMovie = catchAsync(
+  async (req, res, next) => {}
+);
 
-exports.deleteMovie = catchAsync((req, res, next) => {});
+exports.updateMovie = catchAsync(
+  async (req, res, next) => {}
+);
+
+exports.deleteMovie = catchAsync(
+  async (req, res, next) => {}
+);
