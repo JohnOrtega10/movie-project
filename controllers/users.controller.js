@@ -10,7 +10,8 @@ const { filterObj } = require('../utils/filterObj');
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
   const users = await User.findAll({
-    where: { status: 'active' }
+    where: { status: 'active' },
+    exclude: ['password']
   });
 
   res.status(200).json({
@@ -22,7 +23,8 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
 exports.getUserById = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findOne({
-    where: { id, status: 'active' }
+    where: { id, status: 'active' },
+    exclude: ['password']
   });
   if (!user) {
     return next(new AppError(404, 'User not found'));

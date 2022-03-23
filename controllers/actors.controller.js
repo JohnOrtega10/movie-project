@@ -1,3 +1,5 @@
+const { ref, uploadBytes } = require('firebase/storage');
+
 //Models
 const { Actor } = require('../models/actor.model');
 // const {
@@ -8,6 +10,7 @@ const { Actor } = require('../models/actor.model');
 const { AppError } = require('../utils/appError');
 const { catchAsync } = require('../utils/catchAsyn');
 const { filterObj } = require('../utils/filterObj');
+const { storage } = require('../utils/firebase');
 
 exports.getAllActors = catchAsync(
   async (req, res, next) => {
@@ -44,16 +47,9 @@ exports.getActorById = catchAsync(
 
 exports.createNewActor = catchAsync(
   async (req, res, next) => {
-    const { name, country, raiting, age, profilePic } =
-      req.body;
+    const { name, country, raiting, age } = req.body;
 
-    if (
-      !name ||
-      !country ||
-      !raiting ||
-      !age ||
-      !profilePic
-    ) {
+    if (!name || !country || !raiting || !age) {
       return next(
         new AppError(
           400,
@@ -62,12 +58,25 @@ exports.createNewActor = catchAsync(
       );
     }
 
+    //Upload img to Cloud Storage
+    const imgRef = ref(
+      storage,
+      `images/actor/${Date.now()}-${req.file.originalname}`
+    );
+
+    const result = await uploadBytes(
+      imgRef,
+      req.file.buffer
+    );
+
+
+
     const newActor = await Actor.create({
       name,
       country,
       raiting,
       age,
-      profilePic
+      profilePic: result.metadata.fullPath
     });
 
     res.status(201).json({
