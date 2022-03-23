@@ -11,6 +11,11 @@ const {
 
 //Utils
 const { upload } = require('../utils/multer');
+const {
+  validateSession
+} = require('../middlewares/auth.middleware');
+
+router.use(validateSession);
 
 router.get('/', getAllActors);
 
