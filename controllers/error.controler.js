@@ -4,6 +4,7 @@ const globalErrorHandler = (err, req, res, next) => {
 
   res.status(err.statusCode).json({
     status: err.status,
+    err: err,
     message: err.message,
     stack: err.stack
   });
